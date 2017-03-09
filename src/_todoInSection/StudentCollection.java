@@ -3,6 +3,9 @@ package _todoInSection;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
+
 import model.Student;
 
 /**
@@ -16,7 +19,7 @@ import model.Student;
 // (after adding implements TableModel to the class heading).
 //
 // Note: Some TableModel methods need not be implemented.
-public class StudentCollection  {
+public class StudentCollection  implements TableModel{
 
   private List<Student> theStudents;
 
@@ -61,5 +64,78 @@ public class StudentCollection  {
     }
     return null; // not found
   }
+
+@Override
+public void addTableModelListener(TableModelListener l) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public Class<?> getColumnClass(int columnIndex) {
+	if (columnIndex==0)
+		return String.class;
+	if (columnIndex==1)
+		return String.class;
+	if (columnIndex==2)
+		return Double.class;
+	if (columnIndex==3)
+		return Integer.class;
+	return null;
+}
+
+@Override
+public int getColumnCount() {
+	// TODO Auto-generated method stub
+	return 4;
+}
+
+@Override
+public String getColumnName(int columnIndex) {
+	if (columnIndex==0)
+		return "Name";
+	if (columnIndex==1)
+		return "Major";
+	if (columnIndex==2)
+		return "GPA";
+	if (columnIndex==3)
+		return "Age";
+	return null;
+}
+
+@Override
+public int getRowCount() {
+	return theStudents.size();
+}
+
+@Override
+public Object getValueAt(int rowIndex, int columnIndex) {
+	if (columnIndex==0)
+		return theStudents.get(rowIndex).getName();
+	if (columnIndex==1)
+		return theStudents.get(rowIndex).getMajor();
+	if (columnIndex==2)
+		return theStudents.get(rowIndex).getGPA();
+	if (columnIndex==3)
+		return theStudents.get(rowIndex).getAge();
+	return null;
+}
+
+@Override
+public boolean isCellEditable(int rowIndex, int columnIndex) {
+	// DONT DO
+	return false;
+}
+
+@Override
+public void removeTableModelListener(TableModelListener l) {
+	// DONT DO
+	
+}
+
+@Override
+public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+	//DONT DO	
+}
 
 }

@@ -8,8 +8,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 @SuppressWarnings("serial")
 public class StudentGUI extends JFrame {
@@ -26,6 +29,7 @@ public class StudentGUI extends JFrame {
 
   // Need a TableModel to set as the model for a JTabel
   private TableModel model = null;
+  StudentCollection foo=new StudentCollection();
 
   // Like DefaultListModel and JList, now we have
   // a class that implements TableModel so this JTable
@@ -60,6 +64,14 @@ public class StudentGUI extends JFrame {
  
     // TODO: 7) Link up table and the sorter
  
+    
+    table=new JTable();
+    table.setModel(foo);
+    JScrollPane bar=new JScrollPane(table);
+    this.add(bar);
+    RowSorter<TableModel> baz=new TableRowSorter<TableModel>(foo);
+    table.setRowSorter(baz);
+    
     // Layout the GUI
     JButton button = new JButton("Select Highlighted Row");
     JPanel panel = new JPanel();
@@ -79,7 +91,9 @@ public class StudentGUI extends JFrame {
       // row need table's getSelectedRow and convertRowIndexToModel as
       // well as model's getValueAt(rowIndex, columnIndex). See the API
       // for details.
-      System.out.println("Get student's name from the table");
+    	int selectedRow=table.getSelectedRow();
+    	int actualRow=table.convertRowIndexToModel(selectedRow);
+      System.out.println(foo.getValueAt(actualRow, 0));
 
     }
   }
